@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% load static %}{% block title %}{{ product.name }} | PocketWave{% endblock %}{% block content %}<div class="breadcrumbs"><a href="{% url 'products' %}">All phones</a><span>/</span><span>{{ product.name }}</span></div><section class="product-detail"><div class="detail-art">{% if product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}">{% else %}<img src="{% static product.image_asset %}"
+     alt="Illustration of {{ product.name }}">{% endif %}<span class="detail-art-caption">{{ product.brand|upper }} / {{ product.category|upper }}</span></div><div class="detail-info"><span class="eyebrow">{{ product.category|upper }} / {{ product.brand|upper }}</span><h1>{{ product.name }}</h1><p class="detail-description">{{ product.description }}</p><div class="detail-price">₹{{ product.price|floatformat:0 }}</div><p class="availability">{% if product.stock %}<span class="stock-dot"></span> In stock · {{ product.stock }} available{% else %}Currently out of stock{% endif %}</p><form method="post"
+      action="{% url 'cart_add' product.id %}"
+      class="buy-form">{% csrf_token %}<label>Quantity<input type="number"
+       name="quantity"
+       value="1"
+       min="1"
+       max="{{ product.stock }}"
+       {% if not product.stock %}disabled{% endif %}></label><button class="button dark" {% if not product.stock %}disabled{% endif %}>Add to bag ↗</button></form><div class="specs"><h2>At a glance</h2><dl><div><dt>Storage</dt><dd>{{ product.storage|default:'See description' }}</dd></div><div><dt>Display</dt><dd>{{ product.display|default:'See description' }}</dd></div><div><dt>Battery</dt><dd>{{ product.battery|default:'See description' }}</dd></div></dl></div><p class="demo-note">Demo catalog · No online payment is collected.</p></div></section>{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f8f5"><title>{% block title %}PocketWave | Find your next phone{% endblock %}</title><link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml"><link rel="stylesheet" href="{% static 'css/style.css' %}"></head>
+  <body>
+    <header class="topbar"><div class="topbar-inner"><a class="brand" href="{% url 'home' %}" aria-label="PocketWave home"><span class="brand-icon">◈</span><span>pocket<span class="brand-accent">wave</span></span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="{% url 'home' %}"
+   {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Discover</a><a href="{% url 'products' %}"
+   {% if request.resolver_match.url_name == 'products' %}class="active"{% endif %}>All phones</a>{% if user.is_authenticated %}<a href="{% url 'orders' %}">My orders</a>{% endif %}</nav><div class="header-actions"><a class="header-cart"
+   href="{% url 'cart' %}"
+   aria-label="Bag, {{ cart_item_count }} items">Bag <span>{{ cart_item_count }}</span></a>{% if user.is_authenticated %}<a class="account-link" href="{% url 'orders' %}">Hi, {{ user.first_name|default:user.username }}</a><form action="{% url 'logout' %}" method="post">{% csrf_token %}<button class="text-button">Log out</button></form>{% else %}<a class="account-link" href="{% url 'login' %}">Sign in</a>{% endif %}</div></div></header>
+    {% if messages %}<div class="flash-stack" role="status">{% for message in messages %}<div class="flash {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    <main class="site-main">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer"><div><a class="brand" href="{% url 'home' %}"><span class="brand-icon">◈</span><span>pocket<span class="brand-accent">wave</span></span></a><p>Find a phone that fits your day.</p></div><p>Mobile shopping concept · Made by Nunna Venkata Sai Manikanta</p></footer>
+    <nav class="bottom-nav" aria-label="Mobile navigation"><a href="{% url 'home' %}"
+   {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}><span aria-hidden="true">⌂</span>Home</a><a href="{% url 'products' %}"
+   {% if request.resolver_match.url_name == 'products' %}class="active"{% endif %}><span aria-hidden="true">▦</span>Phones</a><a href="{% url 'cart' %}"
+   {% if request.resolver_match.url_name == 'cart' %}class="active"{% endif %}><span aria-hidden="true">◫</span>Bag</a><a href="{% if user.is_authenticated %}{% url 'orders' %}{% else %}{% url 'login' %}{% endif %}"><span aria-hidden="true">◉</span>Account</a></nav>
+    <script src="{% static 'js/app.js' %}" defer></script>
+  </body>
+</html>
