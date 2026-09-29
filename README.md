@@ -1,89 +1,328 @@
-# PocketWave — mobile phone store
+# 🛍️ PocketWaveStore
 
-**CodeAlpha Full Stack Development · Task 1**  
-**Adapted and developed by Nunna Venkata Sai Manikanta**
+### Full-Stack E-Commerce Web Application
 
-PocketWave is a responsive, mobile-first shopping application focused entirely on smartphones. It has a fictional six-phone catalog with custom local vector illustrations, searchable product listings, detailed specifications, a session cart, account registration, and a complete demo order flow.
+**PocketWaveStore** is a full-stack e-commerce web application developed as **Task 1 – Simple E-commerce Store** for the **CodeAlpha Full Stack Development Internship**.
 
-The phone names, specifications and prices in the sample catalog are fictional. Checkout records a demo order in the local database; it does **not** charge a customer or connect to a delivery provider.
+The application provides a complete shopping workflow including product browsing, product details, cart management, user authentication, and order processing through a clean and responsive interface.
 
-## What you can do
+---
 
-- Browse the curated home page or search and filter the phone catalog by type.
-- Sort by price or date and compare storage, display and battery on detail pages.
-- Add phones to a bag, update quantities, and remove items.
-- Create an account, sign in, place a demo order and view order history.
-- Manage catalog items and order statuses in Django admin.
-- Use an app-style bottom navigation on phones and a wide layout on larger screens.
+## 🎥 Project Demo
 
-## Stack
+A complete project walkthrough is available below.
 
-Python, Django 5.2, Django templates, HTML, CSS, JavaScript and SQLite. Product art is kept locally as SVG, so the demo catalog has no external image dependency. The local design uses Google Fonts when online and system fonts when offline.
+### ▶ Watch Demo
 
-## Quick start on Windows
+[**View PocketWaveStore Demo Video**](demo/PocketWaveStore_Demo.mp4)
 
-Extract the ZIP and double-click **`START.bat`** inside the project folder. It creates `.venv`, installs packages, prepares the database, loads fictional demo content, and starts the server. Use one project at a time on port 8000.
+> The demo showcases the user interface, product browsing, authentication, cart flow, order process, and project implementation.
 
-To run the steps manually, open a terminal inside the project folder:
+---
 
-Extract the ZIP and open a terminal **inside `CodeAlpha_PocketWaveStore`**:
+## 📌 Project Overview
 
-```powershell
-py -3 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python manage.py migrate
-python manage.py seed_data
-python manage.py runserver
+PocketWaveStore demonstrates the core workflow of a modern e-commerce platform.
+
+Users can create an account, browse available products, view product information, add products to their cart, and proceed through the order workflow.
+
+The project combines frontend development, backend processing, authentication, and database management into a complete full-stack application.
+
+---
+
+## ✨ Key Features
+
+### 👤 User Authentication
+- User registration
+- User login
+- User logout
+- Secure authenticated sessions
+
+### 🛒 Product Shopping
+- Browse available products
+- View individual product details
+- Product information and pricing
+- Add products to shopping cart
+
+### 🧺 Shopping Cart
+- Add products to cart
+- View selected products
+- Update cart contents
+- Remove products from cart
+- View order total
+
+### 📦 Order Management
+- Create orders
+- Process selected cart items
+- Maintain order information
+- Store order-related data in the database
+
+### 🗄️ Database Integration
+The application manages data for:
+
+- Users
+- Products
+- Shopping cart
+- Orders
+
+### 💻 Responsive Interface
+- Clean navigation
+- Structured product presentation
+- User-friendly shopping workflow
+- Responsive web interface
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+
+- Python
+- Django
+
+### Database
+
+- Django ORM
+- SQLite
+
+### Development Tools
+
+- Visual Studio Code
+- Git
+- GitHub
+
+---
+
+## 🏗️ Application Workflow
+
+```text
+User
+ │
+ ├── Register / Login
+ │
+ ▼
+Product Catalogue
+ │
+ ├── Browse Products
+ ├── View Product Details
+ │
+ ▼
+Shopping Cart
+ │
+ ├── Add Items
+ ├── Update Items
+ ├── Remove Items
+ │
+ ▼
+Order Processing
+ │
+ ▼
+Database
 ```
 
-Open <http://127.0.0.1:8000/>. If PowerShell prevents environment activation, use Command Prompt with `.venv\Scripts\activate.bat` or invoke `.\.venv\Scripts\python.exe` for each command.
+---
 
-Create a regular account on the Register page. For catalog and order management, run `python manage.py createsuperuser` and open <http://127.0.0.1:8000/admin/>.
-
-Run automated checks:
-
-```powershell
-python manage.py check
-python manage.py test
-```
-
-The sample catalog command is idempotent: rerunning it updates the six fictional demo phones by slug. Runtime database files and virtual environments are excluded from the ZIP/Git repository.
-
-## Project layout
+## 📂 Project Structure
 
 ```text
 CodeAlpha_PocketWaveStore/
-├── pocketwave_core/             Django settings and root routes
-├── store/                       Catalog, session bag, checkout, models, admin
-│   ├── management/commands/seed_data.py
-│   └── migrations/
-├── templates/                   Shopping and account screens
-├── static/css/                  Responsive visual system
-├── static/img/products/         Original local phone illustrations
-├── static/js/                   Small interface behavior
-├── START.bat                    Windows one-click local setup
+│
 ├── manage.py
 ├── requirements.txt
-└── README.md
+├── README.md
+│
+├── pocketwavestore/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── store/
+│   ├── migrations/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── forms.py
+│   └── admin.py
+│
+├── templates/
+│   └── ...
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+└── demo/
+    └── PocketWaveStore_Demo.mp4
 ```
 
-## Core data flow
+> The exact internal folder structure may vary depending on the final project version.
 
-`Product` holds price, stock, type, specifications and illustration path. A session bag stores product IDs and quantities; prices come from current product records. Checkout requires login, validates stock inside a database transaction, creates `Order` and `OrderItem` records, and reduces stock. Admin can change the order status. SQLite stores users, products and orders locally.
+---
 
-## Internship task coverage
+## ⚙️ Installation & Setup
 
-| Task 1 requirement | PocketWave implementation |
-| --- | --- |
-| Product listings and details | Phone catalog, search/filter/sort, specifications |
-| Shopping cart | Session bag with add, update, remove and totals |
-| Order processing | Authenticated demo checkout and saved order history |
-| Registration/login | Django account forms and sessions |
-| Database | SQLite models for products and orders, Django users |
+### 1. Clone the Repository
 
-## Local development note
+```bash
+git clone https://github.com/nvsmanikanta-dev/CodeAlpha_PocketWaveStore.git
+```
 
-The default settings are for local development. Before hosting publicly, set `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, and provide production static/media hosting. This project does not include a real payment integration.
+### 2. Open the Project Folder
 
-For a CodeAlpha submission, create a repository named `CodeAlpha_PocketWaveStore`, upload this source, and record your own walkthrough video. The supplied source archive does not include someone else's demo video, Git history, or database.
+```bash
+cd CodeAlpha_PocketWaveStore
+```
+
+### 3. Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### 4. Activate the Virtual Environment
+
+#### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### 5. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 6. Apply Database Migrations
+
+```bash
+python manage.py migrate
+```
+
+### 7. Run the Development Server
+
+```bash
+python manage.py runserver
+```
+
+### 8. Open the Application
+
+```text
+http://127.0.0.1:8000/
+```
+
+---
+
+## 🔐 Admin Access
+
+To create a Django admin account:
+
+```bash
+python manage.py createsuperuser
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/admin/
+```
+
+The admin interface can be used to manage application data such as users, products, and orders.
+
+---
+
+## 📋 CodeAlpha Task 1 Requirements
+
+This project was developed for:
+
+### ✅ Task 1 – Simple E-commerce Store
+
+The task required the implementation of:
+
+- Product listings
+- Shopping cart
+- Product details page
+- Order processing
+- User registration and login
+- Database integration for products, users, and orders
+
+PocketWaveStore was developed around these core requirements as part of the **CodeAlpha Full Stack Development Internship**.
+
+---
+
+## 🎯 Learning Outcomes
+
+This project provided hands-on experience with:
+
+- Full-stack web application development
+- Django backend development
+- User authentication
+- Database models and relationships
+- Django ORM
+- CRUD operations
+- Shopping cart workflows
+- Order processing
+- Frontend and backend integration
+- Git and GitHub version control
+
+---
+
+## 🔗 Project Links
+
+### GitHub Repository
+
+[**CodeAlpha_PocketWaveStore**](https://github.com/nvsmanikanta-dev/CodeAlpha_PocketWaveStore)
+
+### LinkedIn
+
+[**Nunna Venkata Sai Manikanta**](https://www.linkedin.com/in/nunna-venkata-sai-manikanta-6a5506356/)
+
+---
+
+## 👨‍💻 Author
+
+### Nunna Venkata Sai Manikanta
+
+**Full Stack Development Intern**
+
+GitHub:  
+[github.com/nvsmanikanta-dev](https://github.com/nvsmanikanta-dev)
+
+LinkedIn:  
+[linkedin.com/in/nunna-venkata-sai-manikanta-6a5506356](https://www.linkedin.com/in/nunna-venkata-sai-manikanta-6a5506356/)
+
+---
+
+## 🏢 Internship
+
+This project was completed as part of the **CodeAlpha Full Stack Development Internship**.
+
+The internship focuses on gaining practical experience in frontend development, backend development, authentication, database integration, and building complete web applications.
+
+---
+
+## 📄 License
+
+This project is created for educational and internship purposes.
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving the repository a **star ⭐**.
+
+---
+
+<p align="center">
+  <b>PocketWaveStore</b><br>
+  Full-Stack E-Commerce Application<br>
+  CodeAlpha Task 1
+</p>
