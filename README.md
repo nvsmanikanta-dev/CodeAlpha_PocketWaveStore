@@ -8,17 +8,13 @@ The application provides a complete shopping workflow including product browsing
 
 ---
 
+
+
 ## 🎥 Project Demo
 
-A complete project walkthrough is available below.
+Watch the complete PocketWaveStore project demonstration on LinkedIn:
 
-### ▶ Watch Demo
-
-[**View PocketWaveStore Demo Video**](demo/PocketWaveStore_Demo.mp4)
-
-> The demo showcases the user interface, product browsing, authentication, cart flow, order process, and project implementation.
-
----
+### [▶ View PocketWaveStore Demo on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7510742821788749824/)
 
 ## 📌 Project Overview
 
